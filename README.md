@@ -1,7 +1,7 @@
 # PasswordManager
 
 # Groups
-Front-End (MVC): chrisi, maxi e., maxi r., david
+Front-End (MVC): chrisi, maxi e., maxi ra., david
 WPF: anja, laura, tina
 XML: maxi k, jakob, leon
 Database:
