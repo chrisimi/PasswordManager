@@ -10,21 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PasswordManager.WPF
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// Interaktionslogik für EntryWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class EntryWindow : Window
     {
-        public MainWindow()
+        public EntryWindow()
         {
             InitializeComponent();
         }
 
-      
+       
     }
 }
