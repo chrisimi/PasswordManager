@@ -7,13 +7,29 @@
         mc:Ignorable="d"
         Title="EntryWindow" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="DataList" HorizontalAlignment="Left" Height="78" Margin="29,35,0,0" VerticalAlignment="Top" Width="373">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <!--<DataGrid Name="dgData" HorizontalAlignment="Left" Height="307" Margin="10,60,0,0" VerticalAlignment="Top" Width="772" />-->
+
+        <DataGrid Name="dgData" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+
+                <DataGridCheckBoxColumn Header="IDCheck" Binding="{Binding IDCheck}" />
+                <DataGridTextColumn Header="Ressource" Binding="{Binding RessourceName}" />
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}" />
+                <DataGridTextColumn Header="Password" Binding="{Binding Password}" />
+                <DataGridComboBoxColumn Header="Actions"/>
+
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="DeleteAction">Delete</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+            </DataGrid.Columns>
+        </DataGrid>
 
 
     </Grid>

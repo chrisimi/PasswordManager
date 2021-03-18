@@ -8,6 +8,6 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Label Content="Loginformular" HorizontalAlignment="Left" Height="48" Margin="10,10,0,0" VerticalAlignment="Top" Width="462" FontSize="30"/>
-        <Button Content="Login" HorizontalAlignment="Left" Margin="302,196,0,0" VerticalAlignment="Top" Width="186" Height="59"/>
+        <Button x:Name="startButton" Content="Login" HorizontalAlignment="Left" Margin="302,196,0,0" VerticalAlignment="Top" Width="186" Height="59" Click="startButton_Click"/>
     </Grid>
 </Window>

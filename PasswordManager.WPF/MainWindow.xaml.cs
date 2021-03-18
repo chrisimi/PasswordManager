@@ -25,6 +25,12 @@ namespace PasswordManager.WPF
             InitializeComponent();
         }
 
-      
+        private void startButton_Click(object sender, RoutedEventArgs e)
+        {
+            var wnd = new EntryWindow();
+            wnd.Show();
+
+            this.Close();
+        }
     }
 }
