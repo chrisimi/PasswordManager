@@ -24,6 +24,9 @@ namespace PasswordManager.WPF
             InitializeComponent();
         }
 
-       
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
