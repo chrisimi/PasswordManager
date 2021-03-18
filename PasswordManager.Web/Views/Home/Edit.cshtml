@@ -1,0 +1,14 @@
+﻿@Model
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("", "", FormMethod.Post)){
+
+    @Html.LabelFor(a => a.Username)
+    @Html.Label(a => a.Username)
+
+}

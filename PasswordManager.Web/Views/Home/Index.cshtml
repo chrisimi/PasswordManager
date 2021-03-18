@@ -1,4 +1,6 @@
-﻿@{
+﻿@Model
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -6,17 +8,4 @@
     <h1>4DHK Passwort Manager Login</h1>
 </div>
 
-@using (Html.BeginForm()){
-
-        <div class="form-signin, form-group, center-block">
-            <form>
-                <label for="inputEmail" class="visually-hidden">Email address</label>
-                <input type="email" class="form-control" placeholder="Email address" required="" autofocus="">
-                <label for="inputPassword" class="visually-hidden">Password</label>
-                <input type="password" class="form-control" placeholder="Password" required="">
-
-                <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
-
-            </form>
-        </div>
-}
+<button>Login</button>
