@@ -10,6 +10,8 @@ namespace PasswordManager.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private ILogic _logic = null;
+
         private readonly List<Entry> _entries = new List<Entry>()
         {
             new Domain.Entry()
@@ -51,13 +53,13 @@ namespace PasswordManager.Web.Controllers
 
             return View(new PandelModel()
             {
-                Entries = _entries
+                Entries = _logic.GetFromUser(Guid.Parse(Session["user_id"].ToString())).ToList()
             });
         }
 
         public ActionResult Edit(string key)
         {
-            foreach (var entry in _entries)
+            foreach (var entry in _logic.GetFromUser(Guid.Parse(Session["user_id"].ToString())))
             {
                 if (entry.Key == key)
                 {
@@ -70,7 +72,7 @@ namespace PasswordManager.Web.Controllers
 
         public ActionResult Delete(string key)
         {
-            foreach (var entry in _entries)
+            foreach (var entry in _logic.GetFromUser(Guid.Parse(Session["user_id"].ToString())))
             {
                 if (entry.Key == key)
                 {
@@ -85,7 +87,7 @@ namespace PasswordManager.Web.Controllers
         public ActionResult EditSubmit(Entry entry)
         {
             //TODO update
-
+            _logic.Update(entry);
             return RedirectToAction("Pandel");
         }
 
@@ -93,6 +95,14 @@ namespace PasswordManager.Web.Controllers
         public ActionResult SubmitDelete(Entry entry)
         {
             //TODO delete
+            _logic.Remove(entry);
+            return RedirectToAction("Pandel");
+        }
+
+        [HttpPost]
+        public ActionResult SubmitAdd(Entry entry)
+        {
+            _logic.Add(entry);
 
             return RedirectToAction("Pandel");
         }
