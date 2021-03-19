@@ -55,14 +55,25 @@ namespace PasswordManager.Web.Controllers
             });
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(string key)
         {
-            ViewBag.Message = "Edit";
-
-            return View(new PandelModel()
+            foreach(var entry in _entries)
             {
-                Entries = _entries
-            });
+                if(entry.Key == key)
+                {
+                    return View(entry);
+                }
+            }
+
+            return View("/Shared/Error");
+        }
+
+        [HttpPost]
+        public ActionResult EditSubmit(Entry entry)
+        {
+            //TODO update
+
+            return RedirectToAction("Pandel");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model PasswordManager.Web.Models.PandelModel
+﻿@model PasswordManager.Domain.Entry
 
 @{
     ViewBag.Title = "Edit";
@@ -6,10 +6,39 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm("EditSubmit", "HomeController", FormMethod.Post)){
-
+@using (Html.BeginForm("EditSubmit", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.UserId);
     @Html.HiddenFor(a => a.Key);
-    @Html.EditorFor(a => a.Email);
-    @Html.EditorFor(a => a.Password);
+    @Html.HiddenFor(a => a.Changed);
 
+
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Email)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Email)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Password)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Password)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Notes)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Notes)
+        </div>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
 }
