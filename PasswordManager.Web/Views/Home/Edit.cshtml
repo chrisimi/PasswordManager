@@ -1,4 +1,4 @@
-﻿@Model
+﻿@model PasswordManager.Web.Models.PandelModel
 
 @{
     ViewBag.Title = "Edit";
@@ -6,9 +6,10 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm("", "", FormMethod.Post)){
+@using (Html.BeginForm("", "HomeController", FormMethod.Post)){
 
-    @Html.LabelFor(a => a.Username)
-    @Html.Label(a => a.Username)
+    @Html.HiddenFor(a => a.Key);
+    @Html.EditorFor(a => a.Email);
+    @Html.EditorFor(a => a.Password);
 
 }

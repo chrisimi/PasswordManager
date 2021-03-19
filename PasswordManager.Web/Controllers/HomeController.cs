@@ -54,5 +54,15 @@ namespace PasswordManager.Web.Controllers
                 Entries = _entries
             });
         }
+
+        public ActionResult Edit()
+        {
+            ViewBag.Message = "Edit";
+
+            return View(new PandelModel()
+            {
+                Entries = _entries
+            });
+        }
     }
 }
