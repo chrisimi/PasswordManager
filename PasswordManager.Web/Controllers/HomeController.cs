@@ -57,9 +57,22 @@ namespace PasswordManager.Web.Controllers
 
         public ActionResult Edit(string key)
         {
-            foreach(var entry in _entries)
+            foreach (var entry in _entries)
             {
-                if(entry.Key == key)
+                if (entry.Key == key)
+                {
+                    return View(entry);
+                }
+            }
+
+            return View("/Shared/Error");
+        }
+
+        public ActionResult Delete(string key)
+        {
+            foreach (var entry in _entries)
+            {
+                if (entry.Key == key)
                 {
                     return View(entry);
                 }
@@ -72,6 +85,14 @@ namespace PasswordManager.Web.Controllers
         public ActionResult EditSubmit(Entry entry)
         {
             //TODO update
+
+            return RedirectToAction("Pandel");
+        }
+
+        [HttpPost]
+        public ActionResult SubmitDelete(Entry entry)
+        {
+            //TODO delete
 
             return RedirectToAction("Pandel");
         }
