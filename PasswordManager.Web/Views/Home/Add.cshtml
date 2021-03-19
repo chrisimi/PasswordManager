@@ -1,0 +1,57 @@
+﻿@model PasswordManager.Domain.Entry
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add</h2>
+
+@using (Html.BeginForm("submitadd", "home", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.UserId)
+
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Key)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Key)
+        </div>
+    </div>
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Email)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Email)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Password)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Password)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Notes)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Notes)
+        </div>
+    </div>
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Changed)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Changed)
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Erstellen</button>
+}
