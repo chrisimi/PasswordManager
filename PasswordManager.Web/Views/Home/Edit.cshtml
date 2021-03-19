@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm("", "HomeController", FormMethod.Post)){
+@using (Html.BeginForm("EditSubmit", "HomeController", FormMethod.Post)){
 
     @Html.HiddenFor(a => a.Key);
     @Html.EditorFor(a => a.Email);
