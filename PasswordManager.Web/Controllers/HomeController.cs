@@ -10,26 +10,11 @@ namespace PasswordManager.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private ILogic _logic = null;
-
-        private readonly List<Entry> _entries = new List<Entry>()
-        {
-            new Domain.Entry()
-            {
-                Key = "google.com",
-                Email = "chrisi@gmail.com",
-                Password = "pwd1"
-            },
-            new Domain.Entry()
-            {
-                Key = "willtreffen.at",
-                Email ="essa@hak.at",
-                Password = "burger123"
-            }
-        };
+        private static ILogic _logic = new TestLogic();
 
         public ActionResult Index()
         {
+            Session["user_id"] = "00000000-0000-0000-0000-000000000005";
             return View();
         }
 
@@ -83,6 +68,11 @@ namespace PasswordManager.Web.Controllers
             return View("/Shared/Error");
         }
 
+        public ActionResult Add()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult EditSubmit(Entry entry)
         {
@@ -102,6 +92,7 @@ namespace PasswordManager.Web.Controllers
         [HttpPost]
         public ActionResult SubmitAdd(Entry entry)
         {
+            entry.UserId = Guid.Parse(Session["user_id"].ToString());
             _logic.Add(entry);
 
             return RedirectToAction("Pandel");
