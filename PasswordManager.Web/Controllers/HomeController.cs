@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasswordManager.Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,6 +26,24 @@ namespace PasswordManager.Web.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Pandel()
+        {
+            ViewBag.Message = "The Pandel";
+
+            return View(new PandelModel()
+            {
+                Entries = new List<Domain.Entry>()
+                {
+                    new Domain.Entry()
+                    {
+                        Key = "google.com",
+                        Email = "chrisi@gmail.com",
+                        Password = "pwd1"
+                    }
+                }
+            });
         }
     }
 }

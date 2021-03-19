@@ -1,4 +1,5 @@
-﻿@Model 
+﻿@model PasswordManager.Web.Models.PandelModel 
+
 @{
     ViewBag.Title = "Pandel";
 }
@@ -17,15 +18,16 @@
     </thead>
 
     <!--The Content of the Table-->
-    <!--
     <tbody>
-        <tr>
-            <th>Get the ID</th>
-            <th>The Username</th>
-            <th>the Password</th>
-            <th><button>Edit</button></th>
-            <th><button>Delete</button></th>
-        </tr>
+        @foreach (var obj in Model.Entries)
+        {
+            <tr>
+                <th>@obj.Key</th>
+                <th>@obj.Email</th>
+                <th>@obj.Password</th>
+                <th><a class="btn btn-primary" href="/home/edit/@obj.Key">Edit</a> </th>
+                <th><a class="btn btn-primary" href="/home/delete/@obj.Key">Delete</a></th>
+            </tr>
+        }
     </tbody>
-    -->
 </table>
