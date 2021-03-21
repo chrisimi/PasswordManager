@@ -1,0 +1,59 @@
+﻿@model PasswordManager.Domain.Entry
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h2>Willst du wirklich diesen Eintrag löschen?</h2>
+
+@using (Html.BeginForm("SubmitDelete", "Home", FormMethod.Post))
+{
+    @Html.HiddenFor(a => a.UserId)
+
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Key)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Key)
+        </div>
+    </div>
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Email)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Email)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Password)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Password)
+        </div>
+    </div>
+
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Notes)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Notes)
+        </div>
+    </div>
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Changed)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Changed)
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Löschen</button>
+}

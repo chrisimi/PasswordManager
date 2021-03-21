@@ -1,0 +1,35 @@
+﻿@model PasswordManager.Web.Models.PandelModel 
+
+@{
+    ViewBag.Title = "Pandel";
+}
+
+<h2>Pandel</h2>
+
+
+<table class="table">
+    <!--The Head of the Table-->
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+        </tr>
+    </thead>
+
+    <!--The Content of the Table-->
+    <tbody>
+        @foreach (var obj in Model.Entries)
+        {
+            <tr>
+                <th>@obj.Key</th>
+                <th>@obj.Email</th>
+                <th>@obj.Password</th>
+                <th><a class="btn btn-primary" href="/home/edit?key=@obj.Key">Edit</a> </th>
+                <th><a class="btn btn-primary" href="/home/delete?key=@obj.Key">Delete</a></th>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/home/add" class="btn btn-success">Eintrag hinzufügen</a>
