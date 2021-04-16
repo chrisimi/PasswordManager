@@ -14,7 +14,7 @@ namespace PasswordManager.Web.Controllers
 
         public ActionResult Index()
         {
-            Session["user_id"] = "00000000-0000-0000-0000-000000000005";
+            //Session["user_id"] = "00000000-0000-0000-0000-000000000005";
             return View();
         }
 
@@ -23,6 +23,13 @@ namespace PasswordManager.Web.Controllers
             ViewBag.Message = "Your application description page.";
 
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult Auth(Guid userID)
+        {
+            Session["user_id"] = userID.ToString();
+            return RedirectToAction("Pandel");
         }
 
         public ActionResult Contact()
