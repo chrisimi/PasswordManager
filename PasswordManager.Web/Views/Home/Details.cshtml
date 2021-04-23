@@ -1,0 +1,22 @@
+﻿@model PasswordManager.Domain.Entry
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details von @Model.Key</h2>
+
+<h3>@Html.LabelFor(a => a.Email)</h3>
+<h4>@Html.DisplayTextFor(a => a.Email)</h4>
+<br />
+<br />
+<h3>@Html.LabelFor(a => a.Password)</h3>
+<h4>@Html.DisplayTextFor(a => a.Password)</h4>
+<br />
+<br />
+<h3>@Html.LabelFor(a => a.Notes)</h3>
+<h4>@Html.DisplayTextFor(a => a.Notes)</h4>
+
+<a href="~/Views/Home/Edit.cshtml" class="btn btn-primary">Edit</a>
+<a href="~/Views/Home/Delete.cshtml" class="btn btn-primary">Delete</a>

@@ -75,6 +75,12 @@ namespace PasswordManager.Web.Controllers
             return View("/Shared/Error");
         }
 
+        public ActionResult Details(string key)
+        {
+            return View(_logic.GetFromUser(Guid.Parse(Session["user_id"].ToString()))
+                .Where(a => a.Key == key).FirstOrDefault());
+        }
+
         public ActionResult Add()
         {
             return View();
