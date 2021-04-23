@@ -29,7 +29,7 @@ namespace PasswordManager.Web.Controllers
         public ActionResult Auth(Guid userID)
         {
             Session["user_id"] = userID.ToString();
-            return RedirectToAction("Pandel");
+            return RedirectToAction("Overview");
         }
 
         public ActionResult Contact()
@@ -89,7 +89,7 @@ namespace PasswordManager.Web.Controllers
         {
             //TODO update
             _logic.Update(entry);
-            return RedirectToAction("Pandel");
+            return RedirectToAction(("Overview"));
         }
 
         [HttpPost]
@@ -97,7 +97,7 @@ namespace PasswordManager.Web.Controllers
         {
             //TODO delete
             _logic.Remove(entry);
-            return RedirectToAction("Pandel");
+            return RedirectToAction(("Overview"));
         }
 
         [HttpPost]
@@ -106,7 +106,7 @@ namespace PasswordManager.Web.Controllers
             entry.UserId = Guid.Parse(Session["user_id"].ToString());
             _logic.Add(entry);
 
-            return RedirectToAction("Pandel");
+            return RedirectToAction(("Overview"));
         }
 
         private Guid GetIdFromUser()
