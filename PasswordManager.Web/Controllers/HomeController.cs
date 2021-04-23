@@ -51,28 +51,26 @@ namespace PasswordManager.Web.Controllers
 
         public ActionResult Edit(string key)
         {
-            foreach (var entry in _logic.GetFromUser(Guid.Parse(Session["user_id"].ToString())))
-            {
-                if (entry.Key == key)
-                {
-                    return View(entry);
-                }
-            }
+            var a = _logic.GetFromUser(GetIdFromUser())
+                .Where(entry =>
+                (
+                    entry.Key == key &&
+                    entry.UserId == GetIdFromUser()
+                ));
 
-            return View("/Shared/Error");
+            return (a.Any()) ? View(a.First()) : View("../Shared/Error");
         }
 
         public ActionResult Delete(string key)
         {
-            foreach (var entry in _logic.GetFromUser(Guid.Parse(Session["user_id"].ToString())))
-            {
-                if (entry.Key == key)
-                {
-                    return View(entry);
-                }
-            }
+            var a = _logic.GetFromUser(GetIdFromUser())
+                .Where(entry =>
+                (
+                    entry.Key == key &&
+                    entry.UserId == GetIdFromUser()
+                ));
 
-            return View("/Shared/Error");
+            return (a.Any()) ? View(a.First()) : View("../Shared/Error");
         }
 
         public ActionResult Details(string key)
@@ -109,6 +107,13 @@ namespace PasswordManager.Web.Controllers
             _logic.Add(entry);
 
             return RedirectToAction("Pandel");
+        }
+
+        private Guid GetIdFromUser()
+        {
+            if (Session["user_id"] == null) return Guid.Empty;
+
+            return Guid.Parse(Session["user_id"].ToString());
         }
     }
 }
