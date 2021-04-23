@@ -39,9 +39,9 @@ namespace PasswordManager.Web.Controllers
             return View();
         }
 
-        public ActionResult Pandel()
+        public ActionResult Overview()
         {
-            ViewBag.Message = "The Pandel";
+            ViewBag.Message = "Overview";
 
             return View(new PandelModel()
             {
