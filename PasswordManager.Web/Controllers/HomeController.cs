@@ -97,7 +97,7 @@ namespace PasswordManager.Web.Controllers
         {
             //TODO delete
             _logic.Remove(entry);
-            return RedirectToAction(("Overview"));
+            return RedirectToAction("Overview");
         }
 
         [HttpPost]
