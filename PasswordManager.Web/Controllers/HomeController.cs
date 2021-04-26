@@ -45,7 +45,7 @@ namespace PasswordManager.Web.Controllers
 
             return View(new PandelModel()
             {
-                Entries = _logic.GetFromUser(Guid.Parse(Session["user_id"].ToString())).ToList()
+                Entries = _logic.GetFromUser(GetIdFromUser()).ToList()
             });
         }
 
@@ -64,19 +64,16 @@ namespace PasswordManager.Web.Controllers
         public ActionResult Delete(string key)
         {
             var a = _logic.GetFromUser(GetIdFromUser())
-                .Where(entry =>
-                (
-                    entry.Key == key &&
-                    entry.UserId == GetIdFromUser()
-                ));
+                .Where(entry => entry.Key == key);
 
             return (a.Any()) ? View(a.First()) : View("../Shared/Error");
         }
 
         public ActionResult Details(string key)
         {
-            return View(_logic.GetFromUser(Guid.Parse(Session["user_id"].ToString()))
-                .Where(a => a.Key == key).FirstOrDefault());
+            return View(_logic.GetFromUser(GetIdFromUser())
+                .Where(a => a.Key == key)
+                .FirstOrDefault());
         }
 
         public ActionResult Add()
@@ -103,7 +100,7 @@ namespace PasswordManager.Web.Controllers
         [HttpPost]
         public ActionResult SubmitAdd(Entry entry)
         {
-            entry.UserId = Guid.Parse(Session["user_id"].ToString());
+            entry.UserId = GetIdFromUser();
             _logic.Add(entry);
 
             return RedirectToAction(("Overview"));
