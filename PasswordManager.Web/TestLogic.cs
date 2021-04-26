@@ -30,6 +30,7 @@ namespace PasswordManager.Web
 
         public void Add(Entry entry)
         {
+            entry.Changed = DateTime.Now;
             _entries.Add(entry);
         }
 
@@ -58,6 +59,7 @@ namespace PasswordManager.Web
                 {
                     _entries.Remove(obj);
                     _entries.Add(entry);
+                    entry.Changed = DateTime.Now;
                     return;
                 }
             }
