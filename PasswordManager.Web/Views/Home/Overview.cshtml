@@ -23,8 +23,9 @@
             <tr>
                 <th>@obj.Key</th>
                 <th>@obj.Changed.ToString()</th>
+                <th><a class="btn btn-primary" href="/home/details?key=@obj.Key">Details</a></th>
                 <th><a class="btn btn-primary" href="/home/edit?key=@obj.Key">Edit</a> </th>
-                <th><a class="btn btn-primary" href="/home/delete?key=@obj.Key">Delete</a></th>
+                <th><a class="btn btn-danger" href="/home/delete?key=@obj.Key">Delete</a></th>
             </tr>
         }
     </tbody>
