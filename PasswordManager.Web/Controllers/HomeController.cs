@@ -43,9 +43,16 @@ namespace PasswordManager.Web.Controllers
         {
             ViewBag.Message = "Overview";
 
-            return View(new PandelModel()
+
+            var entries = _logic.GetFromUser(GetIdFromUser()).ToList();
+
+            var overviewObjects = new List<OverviewObject>();
+
+            entries.ForEach(a => overviewObjects.Add(a));
+
+            return View(new OverviewModel()
             {
-                Entries = _logic.GetFromUser(GetIdFromUser()).ToList()
+                Entries = overviewObjects
             });
         }
 
@@ -71,9 +78,10 @@ namespace PasswordManager.Web.Controllers
 
         public ActionResult Details(string key)
         {
-            return View(_logic.GetFromUser(GetIdFromUser())
-                .Where(a => a.Key == key)
-                .FirstOrDefault());
+            var a = _logic.GetFromUser(GetIdFromUser())
+                .Where(entry => entry.Key == key);
+
+            return (a.Any()) ? View(a.First()) : View("../Shared/Error");
         }
 
         public ActionResult Add()

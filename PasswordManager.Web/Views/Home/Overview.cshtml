@@ -1,4 +1,4 @@
-﻿@model PasswordManager.Web.Models.PandelModel 
+﻿@model PasswordManager.Web.Models.OverviewModel 
 
 @{
     ViewBag.Title = "Overview";
@@ -12,8 +12,7 @@
     <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Username</th>
-            <th scope="col">Password</th>
+            <th scope="col">Latest Change</th>
         </tr>
     </thead>
 
@@ -23,8 +22,7 @@
         {
             <tr>
                 <th>@obj.Key</th>
-                <th>@obj.Email</th>
-                <th>@obj.Password</th>
+                <th>@obj.Changed.ToString()</th>
                 <th><a class="btn btn-primary" href="/home/edit?key=@obj.Key">Edit</a> </th>
                 <th><a class="btn btn-primary" href="/home/delete?key=@obj.Key">Delete</a></th>
             </tr>
