@@ -106,12 +106,27 @@ namespace PasswordManager.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitAdd(Entry entry)
+        public ActionResult SubmitAdd(AddModel addModel)
         {
-            entry.UserId = GetIdFromUser();
-            _logic.Add(entry);
+            if(ModelState.IsValid && _logic.GetFromUser(GetIdFromUser())
+                .Where(a => a.Key == addModel.Key).Count() == 0 &&
+                GetIdFromUser() != Guid.Empty)
+            {
+                Entry entry = new Entry()
+                {
+                    Changed = DateTime.Now,
+                    Email = addModel.Email,
+                    Key = addModel.Key,
+                    Notes = addModel.Notes,
+                    Password = addModel.Password,
+                    UserId = GetIdFromUser()
+                };
+                _logic.Add(entry);
+                return RedirectToAction("Overview");
+            }
 
-            return RedirectToAction(("Overview"));
+            ViewBag.Feedback = "used key";
+            return View("add", model: addModel);
         }
 
         private Guid GetIdFromUser()
