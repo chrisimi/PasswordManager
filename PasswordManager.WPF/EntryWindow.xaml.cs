@@ -1,4 +1,5 @@
 ﻿using PasswordManager.Domain;
+using PasswordManager.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace PasswordManager.WPF
     /// </summary>
     public partial class EntryWindow : Window
     {
-        private ILogic logic = null;
+        private ILogic logic = new TestLogic();
         private Guid userId;
 
         public EntryWindow(Guid userId)
