@@ -27,7 +27,7 @@ namespace PasswordManager.WPF
 
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
-            var wnd = new EntryWindow();
+            var wnd = new EntryWindow(Guid.NewGuid());
             wnd.Show();
 
             this.Close();

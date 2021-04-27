@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PasswordManager.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,36 +20,21 @@ namespace PasswordManager.WPF
     /// </summary>
     public partial class EntryWindow : Window
     {
-        public EntryWindow()
+        private ILogic logic = null;
+        private Guid userId;
+
+        public EntryWindow(Guid userId)
         {
             InitializeComponent();
 
-            List<Data> data = new List<Data>();
-            data.Add(new Data() { IdCheck = 1, RessourceName = "Facebook", Username = "hello" });
-            data.Add(new Data() { IdCheck = 2, RessourceName = "Insta", Username = "world123" });
-            data.Add(new Data() { IdCheck = 3, RessourceName = "Github", Username = "hi.at" });
+            this.userId = userId;
 
-            dgData.ItemsSource = data;
+            dgData.ItemsSource = logic.GetFromUser(userId);
 
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-        
-        public class Data
-        {
-            public int IdCheck { get; set; }
-
-            public string RessourceName { get; set; }
-
-            public string Username { get; set; }
-
-            public string Password { get; set; }
-
-            IList<Data> DeleteSth();
-            IList<Data> EditSth();
 
         }
 
