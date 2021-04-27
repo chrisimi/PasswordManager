@@ -1,0 +1,34 @@
+﻿@model PasswordManager.Web.Models.OverviewModel 
+
+@{
+    ViewBag.Title = "Overview";
+}
+
+<h2>Pandel</h2>
+
+
+<table class="table">
+    <!--The Head of the Table-->
+    <thead>
+        <tr>
+            <th scope="col">Key</th>
+            <th scope="col">Latest Change</th>
+        </tr>
+    </thead>
+
+    <!--The Content of the Table-->
+    <tbody>
+        @foreach (var obj in Model.Entries)
+        {
+            <tr>
+                <th>@obj.Key</th>
+                <th>@obj.Changed.ToString()</th>
+                <th><a class="btn btn-primary" href="/home/details?key=@obj.Key">Details</a></th>
+                <th><a class="btn btn-primary" href="/home/edit?key=@obj.Key">Edit</a> </th>
+                <th><a class="btn btn-danger" href="/home/delete?key=@obj.Key">Delete</a></th>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/home/add" class="btn btn-success">Eintrag hinzufügen</a>

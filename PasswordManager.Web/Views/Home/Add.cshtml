@@ -1,0 +1,54 @@
+﻿@model PasswordManager.Web.Models.AddModel
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<h2>Add</h2>
+
+@if (ViewBag.Feedback != null)
+{
+    <h2 style="color: red;">@ViewBag.Feedback</h2>
+}
+
+@using (Html.BeginForm("submitadd", "home", FormMethod.Post))
+{
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Key)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Key) @Html.ValidationMessageFor(a => a.Key)
+        </div>
+    </div>
+    <br />
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Email)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Email) @Html.ValidationMessageFor(a => a.Email)
+        </div>
+    </div>
+    <br />
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Password)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Password) @Html.ValidationMessageFor(a => a.Password)
+        </div>
+    </div>
+    <br />
+    <div>
+        <div>
+            @Html.LabelFor(a => a.Notes)
+        </div>
+        <div>
+            @Html.EditorFor(a => a.Notes) @Html.ValidationMessageFor(a => a.Notes)
+        </div>
+    </div>
+    <br />
+
+    <button type="submit" class="btn btn-success">Erstellen</button>
+}
