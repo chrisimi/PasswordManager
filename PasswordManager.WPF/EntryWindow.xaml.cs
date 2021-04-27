@@ -32,6 +32,8 @@ namespace PasswordManager.WPF
 
             dgData.ItemsSource = logic.GetFromUser(userId);
 
+            
+
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -39,5 +41,16 @@ namespace PasswordManager.WPF
 
         }
 
+        private void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+            logic.Add(new Entry());
+        }
+
+        private void delBtn_Click(object sender, RoutedEventArgs e)
+        {
+            logic.Remove(new Entry());
+        }
+
+       
     }
 }

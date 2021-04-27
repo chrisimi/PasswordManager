@@ -9,9 +9,9 @@
     <Grid>
         <!--<DataGrid Name="dgData" HorizontalAlignment="Left" Height="307" Margin="10,60,0,0" VerticalAlignment="Top" Width="772" />-->
 
-        <DataGrid Name="dgData" AutoGenerateColumns="False">
+        <DataGrid Name="dgData" AutoGenerateColumns="False" SelectionChanged="dgData_SelectionChanged">
             <DataGrid.Columns>
-
+                
                 <DataGridCheckBoxColumn Header="IDCheck" Binding="{Binding IDCheck}" />
                 <DataGridTextColumn Header="Ressource" Binding="{Binding RessourceName}" />
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}" />
@@ -30,6 +30,9 @@
 
             </DataGrid.Columns>
         </DataGrid>
+        <Button x:Name="addBtn" Content="Hinzufügen" HorizontalAlignment="Left" Height="18" Margin="272,30,0,0" VerticalAlignment="Top" Width="68" Click="addBtn_Click"/>
+        <Button x:Name="delBtn" Content="Löschen" HorizontalAlignment="Left" Height="18" Margin="363,30,0,0" VerticalAlignment="Top" Width="78" Click="delBtn_Click"/>
+        <DockPanel HorizontalAlignment="Left" Height="100" LastChildFill="False" Margin="185,193,0,0" VerticalAlignment="Top" Width="281"/>
 
 
     </Grid>
