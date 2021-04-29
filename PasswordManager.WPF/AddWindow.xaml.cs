@@ -21,7 +21,6 @@ namespace PasswordManager.WPF
     /// </summary>
     public partial class AddWindow : Window
     {
-        public ILogic logic = new TestLogic();
         public Guid userId;
 
         public AddWindow(Guid userId)
@@ -47,7 +46,7 @@ namespace PasswordManager.WPF
                 
             };
 
-            logic.Add(entry);
+            EntryWindow.logic.Add(entry);
 
             var wnd = new EntryWindow(userId);
             wnd.Show();

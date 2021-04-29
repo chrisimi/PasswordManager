@@ -21,7 +21,7 @@ namespace PasswordManager.WPF
     /// </summary>
     public partial class EntryWindow : Window
     {
-        private ILogic logic = new TestLogic();
+        public static ILogic logic = new TestLogic();
         private Guid userId;
 
         public EntryWindow(Guid userId)
@@ -53,7 +53,10 @@ namespace PasswordManager.WPF
 
         private void delBtn_Click(object sender, RoutedEventArgs e)
         {
-            logic.Remove(new Entry());
+            Entry entry = dgData.SelectedItem as Entry;
+            logic.Remove(entry) ;
+
+            dgData.ItemsSource = logic.GetFromUser(userId);
         }
 
 
@@ -65,9 +68,6 @@ namespace PasswordManager.WPF
             this.Close();
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            
-        }
+      
     }
 }
