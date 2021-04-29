@@ -17,44 +17,29 @@ using System.Windows.Shapes;
 namespace PasswordManager.WPF
 {
     /// <summary>
-    /// Interaktionslogik für EntryWindow.xaml
+    /// Interaktionslogik für editWindow.xaml
     /// </summary>
-    public partial class EntryWindow : Window
+    public partial class editWindow : Window
     {
         private ILogic logic = new TestLogic();
         private Guid userId;
 
-        public EntryWindow(Guid userId)
+        public editWindow(Guid userId)
         {
             InitializeComponent();
-
             this.userId = userId;
 
-            dgData.ItemsSource = logic.GetFromUser(userId);
 
-            
-
-        }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+            lblOldUsername.Content = logic.GetFromUser(userId);
 
         }
 
-        private void addBtn_Click(object sender, RoutedEventArgs e)
-        {
-            logic.Add(new Entry());
-        }
-
-        private void delBtn_Click(object sender, RoutedEventArgs e)
-        {
-            logic.Remove(new Entry());
-        }
 
 
-        private void editBtn_Click(object sender, RoutedEventArgs e)
+
+        private void saveBtn_Click(object sender, RoutedEventArgs e)
         {
-            var wnd = new editWindow(Guid.NewGuid());
+            var wnd = new EntryWindow(Guid.NewGuid());
             wnd.Show();
 
             this.Close();
