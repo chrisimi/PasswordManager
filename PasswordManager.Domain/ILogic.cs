@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace PasswordManager.Domain
 {
@@ -12,5 +13,6 @@ namespace PasswordManager.Domain
         void Remove(Entry entry);
         void Update(Entry entry);
         IList<Entry> GetFromUser(Guid userId);
+        void GetFromUser(TextBox newUser);
     }
 }

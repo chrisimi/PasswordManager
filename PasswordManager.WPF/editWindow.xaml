@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="editWindow" Height="450" Width="800">
     <Grid>
-        <Label x:Name="lblOldUsername" Content="Label" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="104"/>
+        <Label x:Name="lblOldUsername" Content="old UN" HorizontalAlignment="Left" Margin="10,94,0,0" VerticalAlignment="Top" Width="104"/>
         <Label Content="New Username:" HorizontalAlignment="Left" Margin="231,94,0,0" VerticalAlignment="Top" Width="106"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="359,98,0,0" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="143"/>
-        <Label x:Name="lblOldPasswort" Content="Label" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbNewUsername" HorizontalAlignment="Left" Height="23" Margin="359,98,0,0" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="143"/>
+        <Label x:Name="lblOldPassword" Content="old PW" HorizontalAlignment="Left" Margin="10,149,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="New Password:" HorizontalAlignment="Left" Margin="231,149,0,0" VerticalAlignment="Top" Width="124"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="142" Margin="360,152,0,0"/>
+        <TextBox x:Name="tbNewPassword" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="142" Margin="360,152,0,0"/>
         <Button x:Name="saveBtn" Content="Save" HorizontalAlignment="Left" Margin="360,211,0,0" VerticalAlignment="Top" Width="142" Height="34" Click="saveBtn_Click"/>
 
     </Grid>
