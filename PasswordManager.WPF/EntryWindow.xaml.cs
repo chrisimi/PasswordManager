@@ -43,7 +43,12 @@ namespace PasswordManager.WPF
 
         private void addBtn_Click(object sender, RoutedEventArgs e)
         {
-            logic.Add(new Entry());
+            var wnd = new AddWindow(Guid.NewGuid());
+            wnd.Show();
+
+            this.Close();
+
+        
         }
 
         private void delBtn_Click(object sender, RoutedEventArgs e)
@@ -58,6 +63,11 @@ namespace PasswordManager.WPF
             wnd.Show();
 
             this.Close();
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }

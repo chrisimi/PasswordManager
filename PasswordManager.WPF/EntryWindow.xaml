@@ -7,11 +7,15 @@
         mc:Ignorable="d"
         Title="EntryWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="19*"/>
+            <ColumnDefinition Width="69*"/>
+        </Grid.ColumnDefinitions>
         <!--<DataGrid Name="dgData" HorizontalAlignment="Left" Height="307" Margin="10,60,0,0" VerticalAlignment="Top" Width="772" />-->
 
-        <DataGrid Name="dgData" AutoGenerateColumns="False" SelectionChanged="dgData_SelectionChanged">
+        <DataGrid Name="dgData" AutoGenerateColumns="False" SelectionChanged="dgData_SelectionChanged" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                
+
                 <DataGridCheckBoxColumn Header="IDCheck" Binding="{Binding IDCheck}" />
                 <DataGridTextColumn Header="Ressource" Binding="{Binding RessourceName}" />
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}" />
@@ -30,11 +34,11 @@
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="addBtn" Content="Add" HorizontalAlignment="Left" Height="18" Margin="272,30,0,0" VerticalAlignment="Top" Width="68" Click="addBtn_Click"/>
-        <Button x:Name="delBtn" Content="Delete" HorizontalAlignment="Left" Height="18" Margin="363,30,0,0" VerticalAlignment="Top" Width="78" Click="delBtn_Click"/>
-        <DockPanel HorizontalAlignment="Left" Height="100" LastChildFill="False" Margin="185,193,0,0" VerticalAlignment="Top" Width="281"/>
-        <Button x:Name="editBtn" Content="Edit" HorizontalAlignment="Left" Margin="459,30,0,0" VerticalAlignment="Top" Width="75" Click="editBtn_Click"/>
-        <CheckBox Content="" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="addBtn" Content="Add" HorizontalAlignment="Left" Height="18" Margin="101,30,0,0" VerticalAlignment="Top" Width="68" Click="addBtn_Click" Grid.Column="1"/>
+        <Button x:Name="delBtn" Content="Delete" HorizontalAlignment="Left" Height="18" Margin="192,30,0,0" VerticalAlignment="Top" Width="78" Click="delBtn_Click" Grid.Column="1"/>
+        <DockPanel HorizontalAlignment="Left" Height="100" LastChildFill="False" Margin="14,193,0,0" VerticalAlignment="Top" Width="281" Grid.Column="1"/>
+        <Button x:Name="editBtn" Content="Edit" HorizontalAlignment="Left" Margin="288,30,0,0" VerticalAlignment="Top" Width="75" Click="editBtn_Click" Grid.Column="1"/>
+        <CheckBox Content="" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
 
 
     </Grid>

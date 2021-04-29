@@ -30,9 +30,9 @@ namespace PasswordManager.WPF
             this.userId = userId;
 
 
-            lblOldUsername.Content = logic.GetFromUser(userId);
+            //lblOldUsername.Content = logic.GetFromUser(userId);
 
-            lblOldPassword.Content = logic.GetFromUser(userId);
+            //lblOldPassword.Content = logic.GetFromUser(userId);
 
         }
 
@@ -49,8 +49,8 @@ namespace PasswordManager.WPF
             var newUser = userId.Equals(tbNewUsername);
             var newPassword = userId.Equals(tbNewPassword);
 
-            logic.GetFromUser(newUser);
-            logic.GetFromUser(newPassword);
+            //logic.GetFromUser(newUser);
+           //logic.GetFromUser(newPassword);
 
 
         }
