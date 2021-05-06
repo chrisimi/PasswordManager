@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using PasswordManager.Domain;
+using PasswordManager.Web;
 
 namespace PasswordManager.WebService.Controllers
 {
@@ -12,7 +13,7 @@ namespace PasswordManager.WebService.Controllers
     public class EntryController : ApiController
     {
 
-        private static ILogic _logic;
+        private static ILogic _logic = new TestLogic();
 
         [Route("entry/add")]
         public void PostEntry([FromBody] Entry entry) => _logic.Add(entry);
@@ -24,7 +25,7 @@ namespace PasswordManager.WebService.Controllers
         public void PutEntry([FromBody] Entry entry) => _logic.Update(entry);
 
         [Route("entry/get")]
-        public void Get(Guid id) => _logic.GetFromUser(id);
+        public IList<Entry> Get(Guid id) => _logic.GetFromUser(id);
 
 
 
