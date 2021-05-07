@@ -18,5 +18,5 @@
 <h3>@Html.LabelFor(a => a.Notes)</h3>
 <h4>@Html.DisplayTextFor(a => a.Notes)</h4>
 
-<a href="~/Views/Home/Edit.cshtml" class="btn btn-primary">Edit</a>
-<a href="~/Views/Home/Delete.cshtml" class="btn btn-primary">Delete</a>
+<a href="/home/edit?key=@Model.Key" class="btn btn-primary">Edit</a>
+<a href="/home/delete?key=@Model.Key" class="btn btn-primary">Delete</a>
