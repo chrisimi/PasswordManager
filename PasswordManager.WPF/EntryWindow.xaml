@@ -6,31 +6,39 @@
         xmlns:local="clr-namespace:PasswordManager.WPF"
         mc:Ignorable="d"
         Title="EntryWindow" Height="450" Width="800">
-    <Grid>
-        <!--<DataGrid Name="dgData" HorizontalAlignment="Left" Height="307" Margin="10,60,0,0" VerticalAlignment="Top" Width="772" />-->
+    <DockPanel LastChildFill="True">
 
-        <DataGrid Name="dgData" AutoGenerateColumns="False">
+        <WrapPanel DockPanel.Dock="Bottom" >
+            <Button x:Name="addBtn" Content="Add"   Width="68" Click="addBtn_Click" Grid.Column="1"/>
+            <Button x:Name="delBtn" Content="Delete" Width="78" Click="delBtn_Click" Grid.Column="1"/>
+            <Button x:Name="editBtn" Content="Edit" Width="75" Click="editBtn_Click" Grid.Column="1"/>
+        </WrapPanel>
+       
+
+        <DataGrid Name="dgData" AutoGenerateColumns="False" Grid.ColumnSpan="2">
+            
             <DataGrid.Columns>
 
                 <DataGridCheckBoxColumn Header="IDCheck" Binding="{Binding IDCheck}" />
-                <DataGridTextColumn Header="Ressource" Binding="{Binding RessourceName}" />
-                <DataGridTextColumn Header="Username" Binding="{Binding Username}" />
-                <DataGridTextColumn Header="Password" Binding="{Binding Password}" />
-                <DataGridComboBoxColumn Header="Actions"/>
+                <DataGridTextColumn Header="Key" Binding="{Binding Key}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" />
+                <DataGridTextColumn Header="Notes" Binding="{Binding Notes}"/>
+           
 
 
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Click="DeleteAction">Delete</Button>
+                            <!--<Button Click="DeleteAction">Delete</Button>!-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
 
+                
             </DataGrid.Columns>
-        </DataGrid>
+        </DataGrid >
 
 
-    </Grid>
+    </DockPanel>
 </Window>

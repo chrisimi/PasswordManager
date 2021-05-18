@@ -23,8 +23,8 @@ namespace PasswordManager.WebService.Controllers
         [Route("entry/update")]
         public void PutEntry([FromBody] Entry entry) => _logic.Update(entry);
 
-        [Route("entry/get")]
-        public void Get(Guid id) => _logic.GetFromUser(id);
+        //[Route("entry/get")]
+        //public void Get(Guid id) => _logic.GetFromUser(id);
 
 
 

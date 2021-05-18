@@ -1,4 +1,5 @@
 ﻿using PasswordManager.Domain;
+using PasswordManager.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace PasswordManager.WPF
     /// </summary>
     public partial class EntryWindow : Window
     {
-        private ILogic logic = null;
+        public static ILogic logic = new TestLogic();
         private Guid userId;
 
         public EntryWindow(Guid userId)
@@ -31,6 +32,8 @@ namespace PasswordManager.WPF
 
             dgData.ItemsSource = logic.GetFromUser(userId);
 
+            
+
         }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -38,5 +41,33 @@ namespace PasswordManager.WPF
 
         }
 
+        private void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var wnd = new AddWindow(Guid.NewGuid());
+            wnd.Show();
+
+            this.Close();
+
+        
+        }
+
+        private void delBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Entry entry = dgData.SelectedItem as Entry;
+            logic.Remove(entry) ;
+
+            dgData.ItemsSource = logic.GetFromUser(userId);
+        }
+
+
+        private void editBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var wnd = new editWindow(Guid.NewGuid());
+            wnd.Show();
+
+            this.Close();
+        }
+
+      
     }
 }
