@@ -9,5 +9,6 @@
     <Grid>
         <Label Content="Loginformular" HorizontalAlignment="Left" Height="48" Margin="10,10,0,0" VerticalAlignment="Top" Width="462" FontSize="30"/>
         <Button x:Name="startButton" Content="Login" HorizontalAlignment="Left" Margin="302,196,0,0" VerticalAlignment="Top" Width="186" Height="59" Click="startButton_Click"/>
+        <Label x:Name="label1" Content="Label" HorizontalAlignment="Left" Margin="227,115,0,0" VerticalAlignment="Top" Width="142"/>
     </Grid>
 </Window>
