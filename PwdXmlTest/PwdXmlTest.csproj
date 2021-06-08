@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{623DE2FA-A28F-4BA0-8CDB-26236377D624}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>PasswordManager.XML</RootNamespace>
-    <AssemblyName>PasswordManager.XML</AssemblyName>
+    <ProjectGuid>{389CAE58-C4AB-4C2F-8E42-728D189E4BB7}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PwdXmlTest</RootNamespace>
+    <AssemblyName>PwdXmlTest</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,13 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,21 +45,18 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserEntries.cs" />
-    <Compile Include="XmlLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="test.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\PasswordManager.Domain\PasswordManager.Domain.csproj">
       <Project>{23b31223-d905-4487-9fb0-fca267cb9703}</Project>
       <Name>PasswordManager.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PasswordManager.XML\PasswordManager.XML.csproj">
+      <Project>{623de2fa-a28f-4ba0-8cdb-26236377d624}</Project>
+      <Name>PasswordManager.XML</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
