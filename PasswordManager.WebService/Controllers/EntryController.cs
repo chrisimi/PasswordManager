@@ -15,16 +15,15 @@ namespace PasswordManager.WebService.Controllers
 
         private static ILogic _logic = new TestLogic();
 
-        [Route("entry/add")]
+        [Route("add")]
         public void PostEntry([FromBody] Entry entry) => _logic.Add(entry);
 
-        [Route("entry/remove")]
+        [Route("remove")]
         public void DeleteEntry([FromBody] Entry entry) => _logic.Remove(entry);
 
-        [Route("entry/update")]
+        [Route("update")]
         public void PutEntry([FromBody] Entry entry) => _logic.Update(entry);
 
-        [Route("entry/get")]
         public IList<Entry> Get(Guid id) => _logic.GetFromUser(id);
 
 
