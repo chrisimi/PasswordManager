@@ -21,6 +21,7 @@ namespace PasswordManager.Database
         private string userId;
         private string password;
         private string connectionString;
+        private string table;
         
         public DBConnection()
         {
@@ -29,25 +30,47 @@ namespace PasswordManager.Database
 
         private void Initialize()
         {
-            server = "ADD_YOUR_SERVER_URL_OR_IP_ADDRESS_HERE";
-            database = "ADD_YOUR_DATABASE_NAME_HERE";
-            userId = "ADD_YOUR_USERNAME_HERE";
-            password = "ADD_YOUR_PASSWORD_HERE";
+            server = "localhost";
+            database = "pmdb";
+            userId = "root";
+            password = "";
             
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + userId + ";" + "PASSWORD=" + password + ";";
-
-            connectionString = String.Format("server={0}; userId={1}; password={2}; database={3}", server, userId, password, database);
+            table = "Entries";
+            //connectionString = String.Format("server={0}; userId={1}; password={2}; database={3}", server, userId, password, database);
 
             connection = new MySqlConnection(connectionString);
+            OpenConnection();
+            CreateTable();
+        }
+
+        private void CreateTable()
+        {
+            string query = $"CREATE  TABLE IF NOT EXISTS {table} (" +
+                "UserId char(36), " +
+                "UserKey varchar(255), " +
+                "URL varchar(255), " +
+                "Email varchar(255), " +
+                "Password varchar(255), " +
+                "Notes varchar(255), " +
+                "Changed datetime " +
+                ");";
+
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+            cmd.ExecuteNonQuery();
         }
 
         private bool OpenConnection()
         {
+            if (connection.State == ConnectionState.Open)
+                return true;
+
             try
             {
                 connection.Open();
                 return true;
+                
             }
             catch (MySqlException ex)
             {
@@ -63,6 +86,7 @@ namespace PasswordManager.Database
                 }
                 return false;
             }
+            
         }
 
         private bool CloseConnection()
@@ -82,7 +106,9 @@ namespace PasswordManager.Database
      
         public void Update(Entry entry)
         {
-            string query = @"Update Tablename(UserId, Key, URL, Email, Password, Notes, Changed) Values(@UserId, @Key, @URL, @Email, @Password, @Notes, @Changed);";
+            string query = $"UPDATE {table} " +
+                $"SET URL = @URL, Email = @Email, Password = @Password, Notes = @Notes, Changed = @Changed " +
+                $"WHERE UserKey = @Key";
 
             if (OpenConnection() == true)
             {
@@ -103,12 +129,12 @@ namespace PasswordManager.Database
 
         public void Remove(Entry entry)
         {
-            string query = @"Delete Tablename.entry Where UserId = @UserId";
+            string query = $"Delete {table} Where UserKey = @Key";
 
             if (OpenConnection() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("UserId", entry.UserId);
+                cmd.Parameters.AddWithValue("UserKey", entry.Key);
                 
                 cmd.ExecuteNonQuery();
 
@@ -118,7 +144,7 @@ namespace PasswordManager.Database
 
         public void Add(Entry entry)
         {
-            string query = @"Insert Into Tablename(UserId, Key, URL, Email, Password, Notes, Changed) Values(@UserId, @Key, @URL, @Email, @Password, @Notes, @Changed);";
+            string query = $"Insert Into {table}(UserId, UserKey, URL, Email, Password, Notes, Changed) Values(@UserId, @Key, @URL, @Email, @Password, @Notes, @Changed);";
 
             if (OpenConnection() == true)
             {
@@ -190,12 +216,21 @@ namespace PasswordManager.Database
 
         private void MapEntry(IDataReader reader, Entry item)
         {
+            item.UserId = Guid.Parse(reader["UserId"].ToString());
+            string a = reader["UserId"].ToString();
+            string b = reader["Changed"].ToString();
+
+            item.Key = reader["UserKey"] as string;
+            item.URL = reader["URL"] as string;
             item.Email = reader["Email"] as string;
+            item.Password = reader["Password"] as string;
+            item.Notes = reader["Notes"] as string;
+            item.Changed = DateTime.Parse(reader["Changed"].ToString());
         }
 
         public IList<Entry> GetFromUser(Guid userId)
         {
-            IList<Entry> result = Select<Entry>("select....", MapEntry);
+            IList<Entry> result = Select<Entry>($"SELECT * FROM {table} WHERE UserId='{userId.ToString()}'", MapEntry);
             return result;
         }
     }
