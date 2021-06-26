@@ -61,7 +61,7 @@ namespace PasswordManager.Tests
 
             var result = logic.GetFromUser(userId);
 
-            if (result == null || result.Count == 0)
+            if (result == null || result.Count != 0)
                 Assert.Fail("result is not valid");
 
             foreach(var entry in result)
