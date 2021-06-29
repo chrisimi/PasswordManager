@@ -13,7 +13,7 @@ namespace PasswordManager.Database
 {
     public delegate void MapDatabaseValues<T>(System.Data.IDataReader reader, T item);
 
-    public class DBConnection : ILogic
+    public class DbLogic : ILogic
     {
         private MySqlConnection connection;
         private string server;
@@ -23,7 +23,7 @@ namespace PasswordManager.Database
         private string connectionString;
         private string table;
         
-        public DBConnection()
+        public DbLogic()
         {
             Initialize();
         }

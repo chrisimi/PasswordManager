@@ -16,7 +16,7 @@ namespace PasswordManager.Database
         static void Main(string[] args)
         {
             Guid userId = Guid.Parse("36762779-87d1-4f63-9bc4-f86bfa6cc6e7");
-            DBConnection db = new DBConnection();
+            DbLogic db = new DbLogic();
             //db.Add(new Domain.Entry()
             //{
             //    Key = "Amazon",
