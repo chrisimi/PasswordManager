@@ -8,28 +8,11 @@ namespace PasswordManager.Web
 {
     public class TestLogic : ILogic
     {
-        private List<Entry> _entries = new List<Entry>()
-        {
-            new Domain.Entry()
-            {
-                Key = "google.com",
-                Email = "chrisi@gmail.com",
-                Password = "pwd1",
-                Notes = "achtung virus",
-                UserId = Guid.Parse("00000000-0000-0000-0000-000000000005")
-            },
-            new Domain.Entry()
-            {
-                Key = "willtreffen.at",
-                Email ="essa@hak.at",
-                Password = "burger123",
-                Notes = "achtung virus",
-                UserId = Guid.Parse("00000000-0000-0000-0000-000000000005")
-            }
-        };
+        private List<Entry> _entries = new List<Entry>();
 
         public void Add(Entry entry)
         {
+            entry.Changed = DateTime.Now;
             _entries.Add(entry);
         }
 
@@ -58,6 +41,7 @@ namespace PasswordManager.Web
                 {
                     _entries.Remove(obj);
                     _entries.Add(entry);
+                    entry.Changed = DateTime.Now;
                     return;
                 }
             }

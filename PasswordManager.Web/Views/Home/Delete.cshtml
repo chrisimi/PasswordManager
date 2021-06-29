@@ -11,49 +11,52 @@
 @using (Html.BeginForm("SubmitDelete", "Home", FormMethod.Post))
 {
     @Html.HiddenFor(a => a.UserId)
+    @Html.HiddenFor(a => a.Key)
 
     <div>
         <div>
             @Html.LabelFor(a => a.Key)
         </div>
         <div>
-            @Html.EditorFor(a => a.Key)
+            @Html.DisplayTextFor(a => a.Key)
         </div>
     </div>
+    <br />
     <div>
         <div>
             @Html.LabelFor(a => a.Email)
         </div>
         <div>
-            @Html.EditorFor(a => a.Email)
+            @Html.DisplayTextFor(a => a.Email)
         </div>
     </div>
-
+    <br />
     <div>
         <div>
             @Html.LabelFor(a => a.Password)
         </div>
         <div>
-            @Html.EditorFor(a => a.Password)
+            @Html.DisplayTextFor(a => a.Password)
         </div>
     </div>
-
+    <br />
     <div>
         <div>
             @Html.LabelFor(a => a.Notes)
         </div>
         <div>
-            @Html.EditorFor(a => a.Notes)
+            @Html.DisplayTextFor(a => a.Notes)
         </div>
     </div>
+    <br />
     <div>
         <div>
             @Html.LabelFor(a => a.Changed)
         </div>
         <div>
-            @Html.EditorFor(a => a.Changed)
+            @Html.DisplayTextFor(a => a.Changed)
         </div>
     </div>
-
+    <br />
     <button type="submit" class="btn btn-danger">Löschen</button>
 }

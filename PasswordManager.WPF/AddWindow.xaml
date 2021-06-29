@@ -1,0 +1,22 @@
+﻿<Window x:Class="PasswordManager.WPF.AddWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PasswordManager.WPF"
+        mc:Ignorable="d"
+        Title="AddWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="tbKey" HorizontalAlignment="Left" Height="23" Margin="36,68,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Key" HorizontalAlignment="Left" VerticalAlignment="Top" Width="113" Margin="36,30,0,0"/>
+        <Label Content="E-Mail" HorizontalAlignment="Left" Margin="195,30,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Password" HorizontalAlignment="Left" Margin="379,30,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Notes" HorizontalAlignment="Left" Margin="571,30,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="E-Mail" HorizontalAlignment="Left" Margin="195,30,0,0" VerticalAlignment="Top" Width="94"/>
+        <TextBox x:Name="tbEmail" HorizontalAlignment="Left" Height="23" Margin="184,68,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbPassword" HorizontalAlignment="Left" Height="23" Margin="359,68,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="tbNotes" HorizontalAlignment="Left" Height="23" Margin="539,68,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="addData_Btn" Content="Add Data" HorizontalAlignment="Left" Margin="301,238,0,0" VerticalAlignment="Top" Width="132" Height="51" Click="addData_Btn_Click"/>
+
+    </Grid>
+</Window>
