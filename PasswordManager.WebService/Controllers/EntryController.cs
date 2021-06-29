@@ -25,8 +25,5 @@ namespace PasswordManager.WebService.Controllers
         public void PutEntry([FromBody] Entry entry) => _logic.Update(entry);
 
         public IList<Entry> Get(Guid id) => _logic.GetFromUser(id);
-
-
-
     }
 }

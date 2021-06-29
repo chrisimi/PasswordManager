@@ -6,8 +6,8 @@ using System.Web;
 
 namespace PasswordManager.Web.Models
 {
-    public class PandelModel
+    public class OverviewModel
     {
-        public List<Entry> Entries { get; set; }
+        public List<OverviewObject> Entries { get; set; }
     }
 }

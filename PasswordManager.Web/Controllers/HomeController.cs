@@ -14,7 +14,7 @@ namespace PasswordManager.Web.Controllers
 
         public ActionResult Index()
         {
-            Session["user_id"] = "00000000-0000-0000-0000-000000000005";
+            //Session["user_id"] = "00000000-0000-0000-0000-000000000005";
             return View();
         }
 
@@ -25,6 +25,13 @@ namespace PasswordManager.Web.Controllers
             return View();
         }
 
+        [HttpGet]
+        public ActionResult Auth(Guid userID)
+        {
+            Session["user_id"] = userID.ToString();
+            return RedirectToAction("Overview");
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -32,40 +39,49 @@ namespace PasswordManager.Web.Controllers
             return View();
         }
 
-        public ActionResult Pandel()
+        public ActionResult Overview()
         {
-            ViewBag.Message = "The Pandel";
+            ViewBag.Message = "Overview";
 
-            return View(new PandelModel()
+
+            var entries = _logic.GetFromUser(GetIdFromUser()).ToList();
+
+            var overviewObjects = new List<OverviewObject>();
+
+            entries.ForEach(a => overviewObjects.Add(a));
+
+            return View(new OverviewModel()
             {
-                Entries = _logic.GetFromUser(Guid.Parse(Session["user_id"].ToString())).ToList()
+                Entries = overviewObjects
             });
         }
 
         public ActionResult Edit(string key)
         {
-            foreach (var entry in _logic.GetFromUser(Guid.Parse(Session["user_id"].ToString())))
-            {
-                if (entry.Key == key)
-                {
-                    return View(entry);
-                }
-            }
+            var a = _logic.GetFromUser(GetIdFromUser())
+                .Where(entry =>
+                (
+                    entry.Key == key &&
+                    entry.UserId == GetIdFromUser()
+                ));
 
-            return View("/Shared/Error");
+            return (a.Any()) ? View(a.First()) : View("../Shared/Error");
         }
 
         public ActionResult Delete(string key)
         {
-            foreach (var entry in _logic.GetFromUser(Guid.Parse(Session["user_id"].ToString())))
-            {
-                if (entry.Key == key)
-                {
-                    return View(entry);
-                }
-            }
+            var a = _logic.GetFromUser(GetIdFromUser())
+                .Where(entry => entry.Key == key);
 
-            return View("/Shared/Error");
+            return (a.Any()) ? View(a.First()) : View("../Shared/Error");
+        }
+
+        public ActionResult Details(string key)
+        {
+            var a = _logic.GetFromUser(GetIdFromUser())
+                .Where(entry => entry.Key == key);
+
+            return (a.Any()) ? View(a.First()) : View("../Shared/Error");
         }
 
         public ActionResult Add()
@@ -78,7 +94,7 @@ namespace PasswordManager.Web.Controllers
         {
             //TODO update
             _logic.Update(entry);
-            return RedirectToAction("Pandel");
+            return RedirectToAction(("Overview"));
         }
 
         [HttpPost]
@@ -86,16 +102,38 @@ namespace PasswordManager.Web.Controllers
         {
             //TODO delete
             _logic.Remove(entry);
-            return RedirectToAction("Pandel");
+            return RedirectToAction("Overview");
         }
 
         [HttpPost]
-        public ActionResult SubmitAdd(Entry entry)
+        public ActionResult SubmitAdd(AddModel addModel)
         {
-            entry.UserId = Guid.Parse(Session["user_id"].ToString());
-            _logic.Add(entry);
+            if(ModelState.IsValid && _logic.GetFromUser(GetIdFromUser())
+                .Where(a => a.Key == addModel.Key).Count() == 0 &&
+                GetIdFromUser() != Guid.Empty)
+            {
+                Entry entry = new Entry()
+                {
+                    Changed = DateTime.Now,
+                    Email = addModel.Email,
+                    Key = addModel.Key,
+                    Notes = addModel.Notes,
+                    Password = addModel.Password,
+                    UserId = GetIdFromUser()
+                };
+                _logic.Add(entry);
+                return RedirectToAction("Overview");
+            }
 
-            return RedirectToAction("Pandel");
+            ViewBag.Feedback = "used key";
+            return View("add", model: addModel);
+        }
+
+        private Guid GetIdFromUser()
+        {
+            if (Session["user_id"] == null) return Guid.Empty;
+
+            return Guid.Parse(Session["user_id"].ToString());
         }
     }
 }
