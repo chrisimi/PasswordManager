@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PasswordManager.Database;
 using PasswordManager.Domain;
 using PasswordManager.Web;
 using PasswordManager.XML;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 namespace PasswordManager.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class LogicTests
     {
         public static IEnumerable<object[]> TestInput
         {
@@ -17,7 +18,8 @@ namespace PasswordManager.Tests
                 return new[]
                 {
                     new object[] { new TestLogic() },
-                    new object[] { new XmlLogic() }
+                    new object[] { new XmlLogic() },
+                    new object[] { new DbLogic("localhost", "testpwmg", "root", "") }
                 };
             }
         }
@@ -33,7 +35,7 @@ namespace PasswordManager.Tests
             URL = "amazon.com"
         };
 
-        public UnitTest1()
+        public LogicTests()
         {
             entry.UserId = userId;
         }

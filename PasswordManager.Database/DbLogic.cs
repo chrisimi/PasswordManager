@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Data;
+using System.Configuration;
 
 namespace PasswordManager.Database
 {
@@ -16,38 +17,46 @@ namespace PasswordManager.Database
     public class DbLogic : ILogic
     {
         private MySqlConnection connection;
-        private string server;
-        private string database;
-        private string userId;
-        private string password;
-        private string connectionString;
-        private string table;
+        private readonly string _server;
+        private readonly string _database;
+        private readonly string _user;
+        private readonly string _password;
+        private string _connectionString;
+        private readonly string _table = "Entries";
         
         public DbLogic()
         {
+            _server = ConfigurationManager.AppSettings["DbServer"].ToString();
+            _database = ConfigurationManager.AppSettings["Database"].ToString();
+            _user = ConfigurationManager.AppSettings["UserID"].ToString();
+            _password = ConfigurationManager.AppSettings["Password"].ToString();
+            Initialize();
+        }
+
+        public DbLogic(string server, string database, string user, string password)
+        {
+            _server = server;
+            _database = database;
+            _user = user;
+            _password = password;
             Initialize();
         }
 
         private void Initialize()
         {
-            server = "localhost";
-            database = "pmdb";
-            userId = "root";
-            password = "";
-            
-            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
-            database + ";" + "UID=" + userId + ";" + "PASSWORD=" + password + ";";
-            table = "Entries";
-            //connectionString = String.Format("server={0}; userId={1}; password={2}; database={3}", server, userId, password, database);
+            //_connectionString = "SERVER=" + _server + ";" + "DATABASE=" +
+            //_database + ";" + "UID=" + _user + ";" + "PASSWORD=" + _password + ";";
+            //_table = "Entries";
+            _connectionString = string.Format("server={0}; userId={1}; password={2}; database={3}", _server, _user, _password, _database);
 
-            connection = new MySqlConnection(connectionString);
+            connection = new MySqlConnection(_connectionString);
             OpenConnection();
             CreateTable();
         }
 
         private void CreateTable()
         {
-            string query = $"CREATE  TABLE IF NOT EXISTS {table} (" +
+            string query = $"CREATE  TABLE IF NOT EXISTS {_table} (" +
                 "UserId char(36), " +
                 "UserKey varchar(255), " +
                 "URL varchar(255), " +
@@ -86,7 +95,6 @@ namespace PasswordManager.Database
                 }
                 return false;
             }
-            
         }
 
         private bool CloseConnection()
@@ -102,11 +110,10 @@ namespace PasswordManager.Database
                 return false;
             }
         }
-
      
         public void Update(Entry entry)
         {
-            string query = $"UPDATE {table} " +
+            string query = $"UPDATE {_table} " +
                 $"SET URL = @URL, Email = @Email, Password = @Password, Notes = @Notes, Changed = @Changed " +
                 $"WHERE UserKey = @Key";
 
@@ -129,12 +136,12 @@ namespace PasswordManager.Database
 
         public void Remove(Entry entry)
         {
-            string query = $"Delete {table} Where UserKey = @Key";
+            string query = $"Delete {_table} Where UserKey = @Key";
 
             if (OpenConnection() == true)
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("UserKey", entry.Key);
+                cmd.Parameters.AddWithValue("Key", entry.Key);
                 
                 cmd.ExecuteNonQuery();
 
@@ -144,7 +151,7 @@ namespace PasswordManager.Database
 
         public void Add(Entry entry)
         {
-            string query = $"Insert Into {table}(UserId, UserKey, URL, Email, Password, Notes, Changed) Values(@UserId, @Key, @URL, @Email, @Password, @Notes, @Changed);";
+            string query = $"Insert Into {_table}(UserId, UserKey, URL, Email, Password, Notes, Changed) Values(@UserId, @Key, @URL, @Email, @Password, @Notes, @Changed);";
 
             if (OpenConnection() == true)
             {
@@ -162,7 +169,6 @@ namespace PasswordManager.Database
                 this.CloseConnection();
             }
         }
-
         
         public List<T> Select<T>(string query, MapDatabaseValues<T> mapping) where T : new()
         {
@@ -230,7 +236,7 @@ namespace PasswordManager.Database
 
         public IList<Entry> GetFromUser(Guid userId)
         {
-            IList<Entry> result = Select<Entry>($"SELECT * FROM {table} WHERE UserId='{userId.ToString()}'", MapEntry);
+            IList<Entry> result = Select<Entry>($"SELECT * FROM {_table} WHERE UserId='{userId.ToString()}'", MapEntry);
             return result;
         }
     }
